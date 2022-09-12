@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  poupou:
+    image: postgres
+    container_name: database_poupou
+    restart: always
+    ports: 
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=tcc
+      - POSTGRES_PASSWORD=poupou123
+      - POSTGRES_DB=poupou
+    volumes:
+      - pgdata:/data/postgres
+
+
+  app:
+    build: .
+    container_name: poupou
+    restart: always
+    ports: 
+      - 3333:3333
+      - 9229:9229
+    volumes: 
+      - .:/usr/app
+    links: 
+      - poupou
+    depends_on:
+      - poupou
+
+
+
+volumes:
+  pgdata:
+    driver: local
