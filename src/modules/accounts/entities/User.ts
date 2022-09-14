@@ -1,9 +1,9 @@
-import { Entity, Column, PrimaryColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
 @Entity("users")
 class User {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn("uuid")
   uuid: string;
 
   @Column()
@@ -15,11 +15,17 @@ class User {
   @Column()
   password: string;
 
-  @Column()
-  photo: string;
+  @Column({
+    type: 'text',
+    nullable: true
+  })
+  photo: string | null;
   
-  @Column()
-  google_id: string;
+  @Column({
+    type: 'text',
+    nullable: true
+  })
+  google_id: string | null;
 
   @Column()
   is_admin: boolean;
