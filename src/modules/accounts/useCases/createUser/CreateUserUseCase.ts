@@ -9,7 +9,7 @@ class CreateUserUseCase {
   constructor(
     @inject("UsersRepository")
     private usersRepository: IUsersRepository
-  ) {}
+  ) { }
 
   async execute({
     name,
@@ -17,7 +17,8 @@ class CreateUserUseCase {
     password,
     photo,
     google_id,
-    isAdmin,
+    is_admin = false,
+    dark_theme = true
   }: ICreateUserDTO): Promise<void> {
     const userAlreadyExists = await this.usersRepository.findByEmail(email);
 
@@ -33,7 +34,8 @@ class CreateUserUseCase {
       password: passwordHash,
       photo,
       google_id,
-      isAdmin,
+      is_admin,
+      dark_theme
     });
   }
 }
