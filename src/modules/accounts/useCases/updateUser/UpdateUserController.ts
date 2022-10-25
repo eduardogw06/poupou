@@ -3,10 +3,6 @@ import { container } from "tsyringe";
 import { getUserIdFromAuthHeader } from "../../../../utils/getUserIdFromAuthHeader";
 import { UpdateUserUseCase } from "./UpdateUserUseCase";
 
-interface IPayload {
-    sub: string;
-}
-
 class UpdateUserController {
     async handle(request: Request, response: Response): Promise<Response> {
         const { name, email, dark_theme } = request.body;
