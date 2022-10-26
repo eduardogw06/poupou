@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { ensureAuthenticated } from "../middleware/ensureAuthenticated";
-import { CreateCategoryController } from "../modules/target/useCases/createCategory/CreateCategoryController";
-import { DeleteCategoryController } from "../modules/target/useCases/deleteCategory/DeleteCategoryController";
-import { ListCategoryController } from "../modules/target/useCases/listCategory/ListCategoryController";
-import { UpdateCategoryController } from "../modules/target/useCases/updateCategory/UpdateCategoryController";
+import { CreateCategoryController } from "../modules/target/useCases/category/createCategory/CreateCategoryController";
+import { DeleteCategoryController } from "../modules/target/useCases/category/deleteCategory/DeleteCategoryController";
+import { ListCategoryController } from "../modules/target/useCases/category/listCategory/ListCategoryController";
+import { UpdateCategoryController } from "../modules/target/useCases/category/updateCategory/UpdateCategoryController";
 
 const categoriesRoutes = Router();
 

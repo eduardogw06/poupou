@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
-import { IUpdateCategoryDTO } from "../../dtos/IUpdateCategoryDTO";
-import { CategoriesRepository } from "../../repositories/implementations/CategoriesRepository";
+import { IUpdateCategoryDTO } from "../../../dtos/IUpdateCategoryDTO";
+import { CategoriesRepository } from "../../../repositories/implementations/CategoriesRepository";
 
 @injectable()
 class UpdateCategoryUseCase {
