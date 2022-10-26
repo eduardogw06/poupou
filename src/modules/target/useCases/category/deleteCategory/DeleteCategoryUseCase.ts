@@ -1,5 +1,5 @@
 import { inject, injectable } from "tsyringe";
-import { CategoriesRepository } from "../../repositories/implementations/CategoriesRepository";
+import { CategoriesRepository } from "../../../repositories/implementations/CategoriesRepository";
 
 @injectable()
 class DeleteCategoryUseCase {
