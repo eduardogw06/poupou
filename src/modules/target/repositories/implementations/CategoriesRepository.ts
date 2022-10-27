@@ -34,10 +34,8 @@ class CategoriesRepository implements ICategoriesRepository {
         return await this.repository.findOne(id);
     }
 
-    async save(category: Category): Promise<Category> {
-        await this.repository.save(category);
-
-        return category;
+    async save(category: Category): Promise<void> {
+        await this.repository.save(category)
     }
 
     async delete(category: Category): Promise<void> {

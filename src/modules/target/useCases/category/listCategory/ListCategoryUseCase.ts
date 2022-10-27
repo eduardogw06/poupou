@@ -12,7 +12,6 @@ class ListCategoryUseCase {
     ) { }
     async execute(activeOnly: boolean = false): Promise<ICategoryResponseDTO[]> {
         const categories = await this.categoriesRepository.list(activeOnly);
-
         return categories.map((category: Category): ICategoryResponseDTO => CategoryMap.toDTO(category));
     }
 }

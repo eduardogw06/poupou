@@ -43,10 +43,8 @@ class UsersRepository implements IUsersRepository {
     return user;
   }
 
-  async save(user: User): Promise<User> {
+  async save(user: User): Promise<void> {
     await this.repository.save(user);
-
-    return user;
   }
 }
 
