@@ -1,6 +1,6 @@
 {
     "type": "postgres",
-    "synchronize": true,
+    "synchronize": false,
     "port": 5432,
     "host": "localhost",
     "username": "tcc",
