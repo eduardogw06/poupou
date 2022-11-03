@@ -1,0 +1,5 @@
+interface IUpdateTransactionsDTO {
+
+}
+
+export { IUpdateTransactionsDTO }
