@@ -5,6 +5,8 @@ import { ICategoriesRepository } from "../../modules/target/repositories/ICatego
 import { CategoriesRepository } from "../../modules/target/repositories/implementations/CategoriesRepository";
 import { TargetsRepository } from "../../modules/target/repositories/implementations/TargetsRepository";
 import { ITargetsRepository } from "../../modules/target/repositories/ITargetsRepository";
+import { TransactionsRepository } from "../../modules/transaction/repositories/implementations/TransactionsRepository";
+import { ITransactionsRepository } from "../../modules/transaction/repositories/ITransactionsRepository";
 
 container.registerSingleton<IUsersRepository>(
     "UsersRepository",
@@ -19,4 +21,9 @@ container.registerSingleton<ICategoriesRepository>(
 container.registerSingleton<ITargetsRepository>(
     "TargetsRepository",
     TargetsRepository
+)
+
+container.registerSingleton<ITransactionsRepository>(
+    "TransactionsRepository",
+    TransactionsRepository
 )
