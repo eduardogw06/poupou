@@ -1,5 +1,4 @@
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../errors/AppError";
 import { IUserResponseDTO } from "../../dtos/IUserResponseDTO";
 import { UserMap } from "../../mapper/UserMap";
 import { UsersRepository } from "../../repositories/implementations/UsersRepository";
@@ -16,4 +15,4 @@ class GetUserInfoUseCase {
     }
 }
 
-export { GetUserInfoUseCase }
+export { GetUserInfoUseCase };
