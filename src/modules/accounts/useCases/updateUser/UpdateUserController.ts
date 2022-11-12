@@ -12,7 +12,7 @@ class UpdateUserController {
 
         await updateUserUseCase.execute({ user_id, name, email, dark_theme });
 
-        return response.status(201).send();
+        return response.status(200).send();
     }
 }
 
