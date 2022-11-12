@@ -8,14 +8,16 @@ class UserMap {
         email,
         photo,
         is_admin,
-        dark_theme
+        dark_theme,
+        created_at
     }: User): IUserResponseDTO {
         const user = classToClass({
             name,
             email,
             photo,
             is_admin,
-            dark_theme
+            dark_theme,
+            created_at
         });
         return user;
     }
