@@ -10,10 +10,9 @@ const getUserIdFromAuthHeader = (authHeader: string): string => {
     const { SECRET_TOKEN } = process.env;
 
     const [, token] = authHeader.split(" ");
-
     try {
         const { sub: user_id } = verify(
-            token,
+            token.replace(/["]/g, ''),
             SECRET_TOKEN,
         ) as IPayload
 
