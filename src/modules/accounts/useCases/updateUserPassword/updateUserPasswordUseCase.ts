@@ -10,8 +10,8 @@ class UpdateUserPasswordUseCase {
         @inject("UsersRepository")
         private usersRepository: UsersRepository
     ) { }
-    async execute({ email, oldPassword, newPassword, newPasswordConfirm }: IUpdateUserPasswordDTO): Promise<void> {
-        const user = await this.usersRepository.findByEmail(email)
+    async execute({ user_id, oldPassword, newPassword, newPasswordConfirm }: IUpdateUserPasswordDTO): Promise<void> {
+        const user = await this.usersRepository.findById(user_id)
 
         if (!user) throw new AppError("User not found");
 
