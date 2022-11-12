@@ -1,5 +1,5 @@
 interface IUpdateUserPasswordDTO {
-    email: string;
+    user_id: string;
     oldPassword: string;
     newPassword: string;
     newPasswordConfirm: string;
