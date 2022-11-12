@@ -21,7 +21,7 @@ const getUserInfoController = new GetUserInfoController();
 usersRoutes.post("/", createUserController.handle);
 usersRoutes.patch("/", ensureAuthenticated, updateUserController.handle);
 usersRoutes.patch("/update-photo", uploadPhoto.single("photo"), ensureAuthenticated, updateUserPhotoController.handle);
-usersRoutes.patch("/update-password", updateUserPasswordController.handle);
+usersRoutes.patch("/update-password", ensureAuthenticated, updateUserPasswordController.handle);
 usersRoutes.get("/", ensureAuthenticated, getUserInfoController.handle);
 
 export { usersRoutes };
