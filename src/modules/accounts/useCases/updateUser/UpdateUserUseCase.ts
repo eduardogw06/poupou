@@ -15,8 +15,7 @@ class UpdateUserUseCase {
         if (!user) throw new AppError("Apenas usuários autenticados estão autorizados a realizar alterações em seu perfil.");
 
         const userByEmail = await this.usersRepository.findByEmail(email);
-
-        if (email === userByEmail.email && userByEmail.uuid !== user_id)
+        if (userByEmail && email === userByEmail.email && userByEmail.uuid !== user_id)
             throw new AppError("O usuário já existe no sistema. Tente novamente com um novo e-mail.");
 
         user.name = name ?? user.name;
