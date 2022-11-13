@@ -12,12 +12,12 @@ class UpdateUserUseCase {
     async execute({ user_id, name, email, dark_theme }: IUpdateUserDTO): Promise<void> {
         const user = await this.usersRepository.findById(user_id);
 
-        if (!user) throw new AppError("Only authenticated users can change your data");
+        if (!user) throw new AppError("Apenas usuários autenticados estão autorizados a realizar alterações em seu perfil.");
 
         const userByEmail = await this.usersRepository.findByEmail(email);
 
         if (email === userByEmail.email && userByEmail.uuid !== user_id)
-            throw new AppError("E-mail already exists");
+            throw new AppError("O usuário já existe no sistema. Tente novamente com um novo e-mail.");
 
         user.name = name ?? user.name;
         user.email = email ?? user.email;

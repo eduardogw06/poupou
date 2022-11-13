@@ -13,12 +13,12 @@ class UpdateUserPasswordUseCase {
     async execute({ user_id, oldPassword, newPassword, newPasswordConfirm }: IUpdateUserPasswordDTO): Promise<void> {
         const user = await this.usersRepository.findById(user_id)
 
-        if (!user) throw new AppError("User not found");
+        if (!user) throw new AppError("Usuário não encontrado.");
 
         const passwordMatch = await compare(oldPassword, user.password);
-        if (!passwordMatch) throw new AppError("Incorrect current password.");
+        if (!passwordMatch) throw new AppError("Senha atual incorreta. Revise os dados apresentados.");
 
-        if (newPassword !== newPasswordConfirm) throw new AppError("Incorrect password confirmation");
+        if (newPassword !== newPasswordConfirm) throw new AppError("Confirmação de senha incorreta. Revise os dados apresentados.");
 
         const passwordHash = await hash(newPassword, 8);
         user.password = passwordHash;
