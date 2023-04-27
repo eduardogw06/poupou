@@ -14,7 +14,7 @@ const deleteCategoryController = new DeleteCategoryController();
 
 categoriesRoutes.post("/", ensureAuthenticated, createCategoryController.handle);
 categoriesRoutes.get("/", ensureAuthenticated, listCategoryController.handle);
-categoriesRoutes.patch("/", ensureAuthenticated, updateCategoryController.handle);
+categoriesRoutes.put("/", ensureAuthenticated, updateCategoryController.handle);
 categoriesRoutes.delete("/", ensureAuthenticated, deleteCategoryController.handle);
 
 export { categoriesRoutes }
