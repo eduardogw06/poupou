@@ -28,24 +28,7 @@ class TransactionsRepository implements ITransactionsRepository {
         await this.repository.save(transaction);
     }
 
-    async list(target_id: string): Promise<Transaction[]> {
-        return await this.repository.createQueryBuilder("transactions")
-            .innerJoinAndSelect(
-                "targets",
-                "target",
-                "target.uuid::text=transactions.target_id"
-            )
-            .innerJoinAndSelect(
-                "transaction_type",
-                "type",
-                "type.uuid::text=transactions.type_id"
-            )
-            .select(["transactions.uuid", "transactions.target_id", "target.description", "type.uuid", "type.description", "transactions.amount", "transactions.date"])
-            .where("target.uuid::text = :target_id", { target_id })
-            .getRawMany();
-    }
-
-    async findById(id: string, onlyTransaction: boolean = false): Promise<Transaction> {
+    async list(user_id: string, target_id?: string): Promise<Transaction[]> {
         const query = this.repository.createQueryBuilder("transactions")
             .innerJoinAndSelect(
                 "targets",
@@ -58,7 +41,29 @@ class TransactionsRepository implements ITransactionsRepository {
                 "type.uuid::text=transactions.type_id"
             )
             .select(["transactions.uuid", "transactions.target_id", "target.description", "type.uuid", "type.description", "transactions.amount", "transactions.date"])
-            .where("transactions.uuid::text = :id", { id })
+            .where("target.user_id::text = :user_id", { user_id });
+        if (target_id) query.andWhere("target.uuid::text = :target_id", { target_id });
+        query.orderBy("transactions.date");
+
+        return await query.getRawMany();
+    }
+
+    async findById(user_id: string, id: string, onlyTransaction: boolean): Promise<Transaction> {
+        const query = this.repository.createQueryBuilder("transactions")
+            .innerJoinAndSelect(
+                "targets",
+                "target",
+                "target.uuid::text=transactions.target_id"
+            )
+            .innerJoinAndSelect(
+                "transaction_type",
+                "type",
+                "type.uuid::text=transactions.type_id"
+            )
+            .select(["transactions.uuid", "transactions.target_id", "target.description", "transactions.type_id", "type.description", "transactions.amount", "transactions.date"])
+            .where("target.user_id::text = :user_id", { user_id })
+            .andWhere("transactions.uuid::text = :id", { id })
+            .orderBy("transactions.date");
 
         if (onlyTransaction)
             return await query.getOne();
