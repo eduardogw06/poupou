@@ -33,7 +33,7 @@
   ],
   "paths": {
     "/users/update-photo": {
-      "patch": {
+      "put": {
         "tags": [
           "Users"
         ],
@@ -126,7 +126,7 @@
           }
         }
       },
-      "patch": {
+      "put": {
         "tags": [
           "Users"
         ],
@@ -179,7 +179,7 @@
       }
     },
     "/users/update-password": {
-      "patch": {
+      "put": {
         "tags": [
           "Users"
         ],
@@ -229,7 +229,7 @@
           }
         }
       },
-      "patch": {
+      "put": {
         "tags": [
           "Categories"
         ],
@@ -280,7 +280,7 @@
           }
         }
       },
-      "post": {
+      "put": {
         "tags": [
           "Categories"
         ],
@@ -351,7 +351,7 @@
           }
         }
       },
-      "patch": {
+      "put": {
         "tags": [
           "Targets"
         ],
@@ -501,7 +501,7 @@
           }
         }
       },
-      "patch": {
+      "put": {
         "tags": [
           "Transaction"
         ],
