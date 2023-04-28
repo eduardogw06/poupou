@@ -11,7 +11,7 @@ export class InsertCategories1666707780017 implements MigrationInterface {
                         {
                             description: 'Férias',
                             active: true,
-                            icon: 'island-tropical'
+                            icon: 'umbrella-beach'
                         },
                         {
                             description: 'Viagem',
@@ -21,7 +21,7 @@ export class InsertCategories1666707780017 implements MigrationInterface {
                         {
                             description: 'Celular',
                             active: true,
-                            icon: 'mobile'
+                            icon: 'mobile-screen'
                         },
                         {
                             description: 'Motivos médicos',
