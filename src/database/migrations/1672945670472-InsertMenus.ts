@@ -11,56 +11,56 @@ export class InsertMenus1672945670472 implements MigrationInterface {
                         {
                             name: 'Meus objetivos',
                             url: 'meus-objetivos',
-                            icon: 'faPiggyBank',
+                            icon: 'piggy-bank',
                             admin_only: false,
                             active: true
                         },
                         {
                             name: 'Meus aportes',
                             url: 'meus-aportes',
-                            icon: 'faDollar',
+                            icon: 'dollar',
                             admin_only: false,
                             active: true
                         },
                         {
                             name: 'Aportes automáticos',
                             url: 'aportes-automaticos',
-                            icon: 'faRobot',
+                            icon: 'robot',
                             admin_only: false,
                             active: true
                         },
                         {
                             name: 'Perfil',
                             url: 'perfil',
-                            icon: 'faUser',
+                            icon: 'user',
                             admin_only: false,
                             active: true
                         },
                         {
                             name: 'Alterar Senha',
                             url: 'alterar-senha',
-                            icon: 'faKey',
+                            icon: 'key',
                             admin_only: false,
                             active: true
                         },
                         {
                             name: 'E-mails',
                             url: 'emails',
-                            icon: 'faEnvelope',
+                            icon: 'envelope',
                             admin_only: true,
                             active: true
                         },
                         {
                             name: 'Notificações',
                             url: 'notificacoes',
-                            icon: 'faBell',
+                            icon: 'bell',
                             admin_only: true,
                             active: true
                         },
                         {
                             name: 'Categorias',
                             url: 'categorias',
-                            icon: 'faList',
+                            icon: 'list',
                             admin_only: true,
                             active: true
                         },
