@@ -14,7 +14,7 @@ const app = express();
 var corsOptions = {
     origin: ['http://localhost:8080', 'https://www.sistemapoupou.com.br', 'https://main--stirring-gaufre-13fa02.netlify.app'],
     credentials: true,
-    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE']
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
 };
 
 app.use(cors(corsOptions))

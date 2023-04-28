@@ -14,7 +14,7 @@ const deleteTargetController = new DeleteTargetController();
 const listTargetController = new ListTargetController();
 
 targetsRoutes.post("/", ensureAuthenticated, createTargetController.handle);
-targetsRoutes.patch("/", ensureAuthenticated, updateTargetController.handle);
+targetsRoutes.put("/", ensureAuthenticated, updateTargetController.handle);
 targetsRoutes.delete("/", ensureAuthenticated, deleteTargetController.handle);
 targetsRoutes.get("/", ensureAuthenticated, listTargetController.handle);
 

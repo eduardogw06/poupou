@@ -1,25 +1,26 @@
 import { classToClass } from 'class-transformer';
-import { ITargetResponseDTO } from '../dtos/ITargetResponseDTO';
-import { Target } from '../entities/Target';
+import { ISelectedTarget, ITargetResponseDTO } from '../dtos/ITargetResponseDTO';
 
 class TargetMap {
     static toDTO({
-        uuid,
-        description,
-        category_id,
-        user_id,
-        target_amount,
-        date_begin,
-        date_end,
-    }: Target): ITargetResponseDTO {
+        targets_uuid,
+        targets_description,
+        targets_category_id,
+        category_icon,
+        targets_user_id,
+        targets_target_amount,
+        targets_date_begin,
+        targets_date_end,
+    }: ISelectedTarget): ITargetResponseDTO {
         const target = classToClass({
-            uuid,
-            description,
-            category_id,
-            user_id,
-            target_amount,
-            date_begin,
-            date_end,
+            uuid: targets_uuid,
+            description: targets_description,
+            category_id: targets_category_id,
+            category_icon,
+            user_id: targets_user_id,
+            target_amount: targets_target_amount,
+            date_begin: targets_date_begin,
+            date_end: targets_date_end,
         });
         return target;
     }

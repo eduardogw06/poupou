@@ -1,6 +1,7 @@
 import { inject, injectable } from "tsyringe";
 import { IUpdateTargetsDTO } from "../../../dtos/IUpdateTargetDTO";
 import { TargetsRepository } from "../../../repositories/implementations/TargetsRepository";
+import { Target } from "../../../entities/Target";
 
 @injectable()
 class UpdateTargetUseCase {
@@ -19,7 +20,7 @@ class UpdateTargetUseCase {
         date_begin,
         date_end
     }: IUpdateTargetsDTO): Promise<void> {
-        const target = await this.targetsRepository.findById(target_id);
+        const target = await this.targetsRepository.findById(user_id, target_id, true) as Target;
 
         target.description = description ?? target.description;
         target.category_id = category_id ?? target.category_id;

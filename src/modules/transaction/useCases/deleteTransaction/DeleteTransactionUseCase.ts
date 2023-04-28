@@ -8,8 +8,8 @@ class DeleteTransactionUseCase {
         private transactionsRepository: TransactionsRepository
     ) { }
 
-    async execute(transaction_id: string): Promise<void> {
-        const transaction = await this.transactionsRepository.findById(transaction_id, true);
+    async execute(user_id: string, transaction_id: string): Promise<void> {
+        const transaction = await this.transactionsRepository.findById(user_id, transaction_id, true);
         await this.transactionsRepository.delete(transaction);
     }
 }

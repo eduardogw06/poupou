@@ -13,7 +13,7 @@ const deleteTransactionController = new DeleteTransactionController();
 const listTransactionController = new ListTransactionController();
 
 transactionsRoutes.post("/", ensureAuthenticated, createTransactionControlller.handle);
-transactionsRoutes.patch("/", ensureAuthenticated, updateTransactionControlller.handle);
+transactionsRoutes.put("/", ensureAuthenticated, updateTransactionControlller.handle);
 transactionsRoutes.delete("/", ensureAuthenticated, deleteTransactionController.handle);
 transactionsRoutes.get("/", ensureAuthenticated, listTransactionController.handle);
 

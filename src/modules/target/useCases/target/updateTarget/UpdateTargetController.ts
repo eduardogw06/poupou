@@ -5,7 +5,7 @@ import { UpdateTargetUseCase } from "./UpdateTargetUseCase";
 class UpdateTargetController {
     async handle(request: Request, response: Response) {
         const {
-            uuid: target_id,
+            target_id,
             description,
             category_id,
             user_id,

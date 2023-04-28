@@ -7,6 +7,8 @@ import { TargetsRepository } from "../../modules/target/repositories/implementat
 import { ITargetsRepository } from "../../modules/target/repositories/ITargetsRepository";
 import { TransactionsRepository } from "../../modules/transaction/repositories/implementations/TransactionsRepository";
 import { ITransactionsRepository } from "../../modules/transaction/repositories/ITransactionsRepository";
+import { IMenusRepository } from "../../modules/system/repositories/IMenusRepository";
+import { MenusRepository } from "../../modules/system/repositories/implementations/MenusRepository";
 
 container.registerSingleton<IUsersRepository>(
     "UsersRepository",
@@ -26,4 +28,9 @@ container.registerSingleton<ITargetsRepository>(
 container.registerSingleton<ITransactionsRepository>(
     "TransactionsRepository",
     TransactionsRepository
+)
+
+container.registerSingleton<IMenusRepository>(
+    "MenusRepository",
+    MenusRepository
 )

@@ -1,6 +1,5 @@
 import { inject, injectable } from "tsyringe";
-import { ITargetResponseDTO } from "../../../dtos/ITargetResponseDTO";
-import { Target } from "../../../entities/Target";
+import { ISelectedTarget, ITargetResponseDTO } from "../../../dtos/ITargetResponseDTO";
 import { TargetMap } from "../../../mapper/TargetMap";
 import { TargetsRepository } from "../../../repositories/implementations/TargetsRepository";
 
@@ -20,18 +19,16 @@ class ListTargetUseCase {
         let targets = [];
 
         if (target_id) {
-            const target = await this.targetsRepository.findById(target_id);
+            const target = await this.targetsRepository.findById(user_id, target_id, false) as ISelectedTarget;
 
-            if (target.user_id === user_id)
+            if (target.targets_user_id === user_id)
                 targets.push(target);
         } else {
             targets = await this.targetsRepository.list(user_id);
         }
 
-
-        return targets.map((target: Target): ITargetResponseDTO => TargetMap.toDTO(target))
+        return targets.map((target: ISelectedTarget): ITargetResponseDTO => TargetMap.toDTO(target))
     }
-
 }
 
-export { ListTargetUseCase }
+export { ListTargetUseCase };
