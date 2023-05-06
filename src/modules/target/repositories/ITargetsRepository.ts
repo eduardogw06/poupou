@@ -6,6 +6,7 @@ interface ITargetsRepository {
     create(data: ICreateTargetsDTO): Promise<void>;
     list(user_id: string): Promise<ISelectedTarget[]>;
     findById(user_id: string, id: string, onlyTarget: boolean): Promise<ISelectedTarget | Target>;
+    findByCategory(category_id: string): Promise<ISelectedTarget[]>;
     save(target: Target): Promise<void>;
     delete(target: Target): Promise<void>;
 }
