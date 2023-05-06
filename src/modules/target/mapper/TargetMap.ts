@@ -1,5 +1,5 @@
 import { classToClass } from 'class-transformer';
-import { ISelectedTarget, ITargetResponseDTO } from '../dtos/ITargetResponseDTO';
+import { ISelectedTarget, ITargetProgress, ITargetResponseDTO } from '../dtos/ITargetResponseDTO';
 
 class TargetMap {
     static toDTO({
@@ -11,7 +11,7 @@ class TargetMap {
         targets_target_amount,
         targets_date_begin,
         targets_date_end,
-    }: ISelectedTarget): ITargetResponseDTO {
+    }: ISelectedTarget, target_progress: ITargetProgress): ITargetResponseDTO {
         const target = classToClass({
             uuid: targets_uuid,
             description: targets_description,
@@ -19,6 +19,8 @@ class TargetMap {
             category_icon,
             user_id: targets_user_id,
             target_amount: targets_target_amount,
+            total_saved: target_progress?.total_saved,
+            target_percent: target_progress?.target_percent,
             date_begin: targets_date_begin,
             date_end: targets_date_end,
         });

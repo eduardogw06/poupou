@@ -6,6 +6,8 @@ import { IUpdateTargetsDTO } from "../../dtos/IUpdateTargetDTO";
 import { Category } from "../../entities/Category";
 import { Target } from "../../entities/Target";
 import { ITargetsRepository } from "../ITargetsRepository";
+import { Transaction } from "../../../transaction/entities/Transaction";
+import { TransactionType } from "../../../transaction/entities/TransactionType";
 
 class TargetsRepository implements ITargetsRepository {
     private repository: Repository<Target>;
@@ -63,6 +65,42 @@ class TargetsRepository implements ITargetsRepository {
         if (onlyTarget) return await query.getOne();
 
         return await query.getRawOne();
+    }
+
+    async findByCategory(category_id: string): Promise<ISelectedTarget[]> {
+        const query = this.repository
+            .createQueryBuilder("targets")
+            .innerJoinAndSelect(
+                Category,
+                "category",
+                "targets.category_id = category.uuid::text"
+            )
+            .select(["targets.uuid", "targets.description", "targets.category_id", "category.icon as category_icon", "targets.user_id", "targets.target_amount", "targets.date_begin", "targets.date_end"])
+            .where('category.uuid = :uuid', { uuid: category_id })
+
+        return await query.getRawMany();
+    }
+
+    async listTargetProgress(user_id: string) {
+        return await this.repository
+            .createQueryBuilder("targets")
+            .leftJoinAndSelect(
+                Transaction,
+                "transactions",
+                "targets.uuid::text = transactions.target_id"
+            )
+            .leftJoinAndSelect(
+                TransactionType,
+                "transaction_type",
+                "transaction_type.uuid::text = transactions.type_id and transaction_type.description = 'Aporte'"
+            )
+            .select(["targets.uuid", "targets.description", "targets.target_amount", "coalesce(sum(transactions.amount), 0) as total_saved", "coalesce(round(100*sum(transactions.amount)/targets.target_amount), 0) as target_percent"])
+            .where("targets.user_id = :user_id", { user_id: user_id })
+            .groupBy("targets.uuid")
+            .addGroupBy("targets.description")
+            .addGroupBy("targets.target_amount")
+            .addGroupBy("transactions.target_id")
+            .getRawMany();
     }
 
     async save(target: Target): Promise<void> {
