@@ -3,6 +3,7 @@ import { ICreateTransactionDTO } from "../../dtos/ICreateTransactionDTO";
 import { IUpdateTransactionsDTO } from "../../dtos/IUpdateTransactionsDTO";
 import { Transaction } from "../../entities/Transaction";
 import { ITransactionsRepository } from "../ITransactionsRepository";
+import { TransactionTypeRepository } from "./TransactionTypeRepository";
 
 
 class TransactionsRepository implements ITransactionsRepository {
@@ -14,18 +15,23 @@ class TransactionsRepository implements ITransactionsRepository {
 
     async create({
         target_id,
-        type_id,
+        type,
         amount,
         date
     }: ICreateTransactionDTO): Promise<void> {
-        const transaction = this.repository.create({
-            target_id,
-            type_id,
-            amount,
-            date
-        });
+        const transactionTypeRepository = new TransactionTypeRepository();
+        const transactionType = await transactionTypeRepository.list(type);
 
-        await this.repository.save(transaction);
+        if (transactionType.length) {
+            const transaction = this.repository.create({
+                target_id,
+                type_id: transactionType[0].uuid,
+                amount,
+                date
+            });
+
+            await this.repository.save(transaction);
+        }
     }
 
     async list(user_id: string, target_id?: string): Promise<Transaction[]> {

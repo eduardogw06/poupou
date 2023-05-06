@@ -11,13 +11,13 @@ class CreateTransactionUseCase {
 
     async execute({
         target_id,
-        type_id,
+        type,
         amount,
         date
     }: ICreateTransactionDTO): Promise<void> {
         await this.transactionsRepository.create({
             target_id,
-            type_id,
+            type,
             amount,
             date
         });
