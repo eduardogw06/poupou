@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { ListMenuUseCase } from "./ListMenuUseCase";
-import { getUserIdFromAuthHeader } from "../../../../utils/getUserIdFromAuthHeader";
+import { getUserIdFromAuthHeader } from "../../../../../utils/getUserIdFromAuthHeader";
 
 class ListMenuController {
     async handle(request: Request, response: Response): Promise<Response> {
@@ -14,4 +14,4 @@ class ListMenuController {
     }
 }
 
-export { ListMenuController }
+export { ListMenuController };
