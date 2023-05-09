@@ -3,6 +3,8 @@ import { getRepository, Repository } from "typeorm";
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
 import { User } from "../../entities/User";
 import { IUsersRepository } from "../IUsersRepository";
+import { EmailsRepository } from "../../../system/repositories/implementations/EmailsRepository";
+import { sendMail } from "../../../../utils/sendMail";
 
 class UsersRepository implements IUsersRepository {
   private repository: Repository<User>;
@@ -30,7 +32,21 @@ class UsersRepository implements IUsersRepository {
       dark_theme
     });
 
-    await this.repository.save(user);
+    const savedUser = await this.repository.save(user);
+
+    if (savedUser) {
+      const emailsRepository = new EmailsRepository();
+      const newRegisterEmail = await emailsRepository.findById(process.env.NEW_USER_EMAIL);
+
+      if (newRegisterEmail) {
+        sendMail({
+          to: savedUser.email,
+          from: process.env.FROM_EMAIL,
+          subject: newRegisterEmail.subject,
+          content: newRegisterEmail.content.replace('[name]', savedUser.name)
+        });
+      }
+    }
   }
 
   async findByEmail(email: string): Promise<User> {

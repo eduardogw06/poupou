@@ -1,9 +1,9 @@
 import { inject, injectable } from "tsyringe";
-import { MenusRepository } from "../../repositories/implementations/MenusRepository";
-import { IMenuResponseDTO } from "../../dtos/IMenuResponse.DTO";
-import { Menu } from "../../entities/Menu";
-import { MenuMap } from "../../mapper/MenuMap";
-import { UsersRepository } from "../../../accounts/repositories/implementations/UsersRepository";
+import { MenusRepository } from "../../../repositories/implementations/MenusRepository";
+import { IMenuResponseDTO } from "../../../dtos/IMenuResponse.DTO";
+import { UsersRepository } from "../../../../accounts/repositories/implementations/UsersRepository";
+import { MenuMap } from "../../../mapper/MenuMap";
+import { Menu } from "../../../entities/Menu";
 
 @injectable()
 class ListMenuUseCase {

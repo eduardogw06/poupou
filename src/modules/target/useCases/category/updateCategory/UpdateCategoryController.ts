@@ -6,9 +6,9 @@ class UpdateCategoryController {
     async handle(request: Request, response: Response): Promise<Response> {
         const { category_id, description, active, icon } = request.body;
 
-        const updateCategoryController = container.resolve(UpdateCategoryUseCase);
+        const updateCategoryUseCase = container.resolve(UpdateCategoryUseCase);
 
-        await updateCategoryController.execute({ category_id, description, active, icon });
+        await updateCategoryUseCase.execute({ category_id, description, active, icon });
 
         return response.status(201).send();
     }

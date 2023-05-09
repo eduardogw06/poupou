@@ -4,6 +4,12 @@ import { IUpdateTransactionsDTO } from "../../dtos/IUpdateTransactionsDTO";
 import { Transaction } from "../../entities/Transaction";
 import { ITransactionsRepository } from "../ITransactionsRepository";
 import { TransactionTypeRepository } from "./TransactionTypeRepository";
+import { EmailsRepository } from "../../../system/repositories/implementations/EmailsRepository";
+import { UsersRepository } from "../../../accounts/repositories/implementations/UsersRepository";
+import { sendMail } from "../../../../utils/sendMail";
+import { TargetsRepository } from "../../../target/repositories/implementations/TargetsRepository";
+import { Target } from "../../../target/entities/Target";
+import { numberToReal } from "../../../../utils/numberToReal";
 
 
 class TransactionsRepository implements ITransactionsRepository {
@@ -14,6 +20,7 @@ class TransactionsRepository implements ITransactionsRepository {
     }
 
     async create({
+        user_id,
         target_id,
         type,
         amount,
@@ -30,7 +37,30 @@ class TransactionsRepository implements ITransactionsRepository {
                 date
             });
 
-            await this.repository.save(transaction);
+            const savedTransaction = await this.repository.save(transaction);
+
+            if (savedTransaction) {
+                const emailsRepository = new EmailsRepository();
+                const newTransactionEmail = await emailsRepository.findById(process.env.NEW_REGISTER_EMAIL);
+
+                const usersRepository = new UsersRepository();
+                const user = await usersRepository.findById(user_id);
+
+                const targetsRepository = new TargetsRepository();
+                const target = await targetsRepository.findById(user_id, target_id, true) as Target;
+
+                if (newTransactionEmail && user) {
+
+                    sendMail({
+                        to: user.email,
+                        from: process.env.FROM_EMAIL,
+                        subject: newTransactionEmail.subject,
+                        content: newTransactionEmail.content
+                            .replace('[transaction_amount]', numberToReal(Number(amount)))
+                            .replace('[target_name]', target.description)
+                    });
+                }
+            }
         }
     }
 

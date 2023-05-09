@@ -8,6 +8,9 @@ import { Target } from "../../entities/Target";
 import { ITargetsRepository } from "../ITargetsRepository";
 import { Transaction } from "../../../transaction/entities/Transaction";
 import { TransactionType } from "../../../transaction/entities/TransactionType";
+import { EmailsRepository } from "../../../system/repositories/implementations/EmailsRepository";
+import { sendMail } from "../../../../utils/sendMail";
+import { UsersRepository } from "../../../accounts/repositories/implementations/UsersRepository";
 
 class TargetsRepository implements ITargetsRepository {
     private repository: Repository<Target>;
@@ -33,7 +36,27 @@ class TargetsRepository implements ITargetsRepository {
             date_end
         });
 
-        await this.repository.save(target);
+        const savedTarget = await this.repository.save(target);
+
+        if (savedTarget) {
+            const emailsRepository = new EmailsRepository();
+            const newTargetEmail = await emailsRepository.findById(process.env.NEW_REGISTER_EMAIL);
+
+            const usersRepository = new UsersRepository();
+            const user = await usersRepository.findById(user_id);
+
+            if (newTargetEmail && user) {
+
+                sendMail({
+                    to: user.email,
+                    from: process.env.FROM_EMAIL,
+                    subject: newTargetEmail.subject,
+                    content: newTargetEmail.content
+                        .replace('[name]', user.name)
+                        .replace('[target_name]', description)
+                });
+            }
+        }
     }
 
     async list(user_id: string): Promise<ISelectedTarget[]> {
@@ -50,7 +73,7 @@ class TargetsRepository implements ITargetsRepository {
             .getRawMany();
     }
 
-    async findById(user_id: string, id: string, onlyTarget: boolean): Promise<ISelectedTarget | Target> {
+    async findById(user_id: string, id: string, onlyTarget: boolean = false): Promise<ISelectedTarget | Target> {
         const query = this.repository
             .createQueryBuilder("targets")
             .innerJoinAndSelect(
@@ -61,6 +84,8 @@ class TargetsRepository implements ITargetsRepository {
             .select(["targets.uuid", "targets.description", "targets.category_id", "category.icon as category_icon", "targets.user_id", "targets.target_amount", "targets.date_begin", "targets.date_end"])
             .where('targets.user_id = :user_id', { user_id: user_id })
             .andWhere('targets.uuid = :uuid', { uuid: id })
+
+        console.log(query.getQueryAndParameters());
 
         if (onlyTarget) return await query.getOne();
 
