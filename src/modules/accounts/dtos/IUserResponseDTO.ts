@@ -1,3 +1,5 @@
+import { Achievements } from "../../../utils/getAchivements";
+
 interface IUserResponseDTO {
     uuid: string;
     name: string;
@@ -5,6 +7,7 @@ interface IUserResponseDTO {
     photo: string;
     is_admin: boolean;
     dark_theme: boolean;
+    achievments?: Achievements
 }
 
 export { IUserResponseDTO };

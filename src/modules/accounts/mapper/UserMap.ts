@@ -1,6 +1,7 @@
 import { classToClass } from 'class-transformer';
 import { IUserResponseDTO } from "../dtos/IUserResponseDTO";
 import { User } from "../entities/User";
+import { Achievements } from '../../../utils/getAchivements';
 
 class UserMap {
     static toDTO({
@@ -11,7 +12,7 @@ class UserMap {
         is_admin,
         dark_theme,
         created_at
-    }: User): IUserResponseDTO {
+    }: User, achievements: Achievements): IUserResponseDTO {
         const user = classToClass({
             uuid,
             name,
@@ -19,7 +20,8 @@ class UserMap {
             photo,
             is_admin,
             dark_theme,
-            created_at
+            created_at,
+            achievements
         });
         return user;
     }

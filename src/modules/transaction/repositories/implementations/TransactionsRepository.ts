@@ -107,6 +107,20 @@ class TransactionsRepository implements ITransactionsRepository {
         return await query.getRawOne();
     }
 
+    async getTransactionTotal(user_id: string): Promise<number> {
+        const queryResult = await this.repository.createQueryBuilder('transactions')
+            .innerJoinAndSelect(
+                "targets",
+                "target",
+                "target.uuid::text=transactions.target_id"
+            )
+            .select('SUM(transactions.amount)', 'sum')
+            .where('target.user_id::text = :user_id', { user_id })
+            .getRawOne();
+
+        return Number(queryResult.sum) || 0;
+    };
+
     async save(transaction: IUpdateTransactionsDTO): Promise<void> {
         await this.repository.save(transaction);
     }
