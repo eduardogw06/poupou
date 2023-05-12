@@ -14,6 +14,7 @@ interface IResponse {
         id: string;
         name: string;
         email: string;
+        is_admin: boolean;
     };
     token: string;
 }
@@ -29,6 +30,8 @@ class AuthenticateUserUseCase {
         const { SECRET_TOKEN } = process.env;
 
         const user = await this.usersRepository.findByEmail(email);
+
+        if (user.google_id) throw new AppError("Para acessar sua conta, faça seu login com o Google.");
 
         if (!user) {
             throw new AppError("E-mail ou senha incorretos!");
@@ -50,7 +53,8 @@ class AuthenticateUserUseCase {
             user: {
                 id: user.uuid,
                 name: user.name,
-                email: user.email
+                email: user.email,
+                is_admin: user.is_admin
             }
         };
 
