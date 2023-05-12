@@ -21,7 +21,7 @@ class UsersRepository implements IUsersRepository {
     google_id,
     is_admin,
     dark_theme
-  }: ICreateUserDTO): Promise<void> {
+  }: ICreateUserDTO): Promise<User> {
     const user = this.repository.create({
       name,
       email,
@@ -46,6 +46,8 @@ class UsersRepository implements IUsersRepository {
           content: newRegisterEmail.content.replace('[name]', savedUser.name)
         });
       }
+
+      return savedUser;
     }
   }
 

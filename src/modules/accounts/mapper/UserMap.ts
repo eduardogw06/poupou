@@ -4,6 +4,7 @@ import { User } from "../entities/User";
 
 class UserMap {
     static toDTO({
+        uuid,
         name,
         email,
         photo,
@@ -12,6 +13,7 @@ class UserMap {
         created_at
     }: User): IUserResponseDTO {
         const user = classToClass({
+            uuid,
             name,
             email,
             photo,
