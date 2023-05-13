@@ -18,7 +18,7 @@ class UpdateUserPasswordUseCase {
         const passwordMatch = await compare(oldPassword, user.password);
         if (!passwordMatch) throw new AppError("Senha atual incorreta. Revise os dados apresentados.");
 
-        if (newPassword !== newPasswordConfirm) throw new AppError("Confirmação de senha incorreta. Revise os dados apresentados.");
+        if (newPassword !== newPasswordConfirm) throw new AppError("A nova senha deve ser identica a confirmação. Revise os dados apresentados.");
 
         const passwordHash = await hash(newPassword, 8);
         user.password = passwordHash;
