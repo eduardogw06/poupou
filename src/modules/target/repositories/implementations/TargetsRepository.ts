@@ -85,8 +85,6 @@ class TargetsRepository implements ITargetsRepository {
             .where('targets.user_id = :user_id', { user_id: user_id })
             .andWhere('targets.uuid = :uuid', { uuid: id })
 
-        console.log(query.getQueryAndParameters());
-
         if (onlyTarget) return await query.getOne();
 
         return await query.getRawOne();
