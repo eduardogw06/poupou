@@ -1,8 +1,8 @@
 import { inject, injectable } from "tsyringe";
-import { IListTransactionsDTO } from "../../dtos/IListTransactionsDTO";
-import { ITransactionResponseDTO } from "../../dtos/ITransactionResponseDTO";
-import { TransactionMap } from "../../mapper/TransactionMap";
-import { TransactionsRepository } from "../../repositories/implementations/TransactionsRepository";
+import { TransactionsRepository } from "../../../repositories/implementations/TransactionsRepository";
+import { IListTransactionsDTO } from "../../../dtos/IListTransactionsDTO";
+import { ITransactionResponseDTO } from "../../../dtos/ITransactionResponseDTO";
+import { TransactionMap } from "../../../mapper/TransactionMap";
 
 interface IRequest {
     user_id: string;

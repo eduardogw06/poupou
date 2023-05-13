@@ -1,5 +1,5 @@
 import { inject, injectable } from "tsyringe";
-import { TransactionsRepository } from "../../repositories/implementations/TransactionsRepository";
+import { TransactionsRepository } from "../../../repositories/implementations/TransactionsRepository";
 
 @injectable()
 class DeleteTransactionUseCase {

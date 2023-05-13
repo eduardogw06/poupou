@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { ListTransactionUseCase } from "./ListTransactionUseCase";
-import { getUserIdFromAuthHeader } from "../../../../utils/getUserIdFromAuthHeader";
+import { getUserIdFromAuthHeader } from "../../../../../utils/getUserIdFromAuthHeader";
 
 class ListTransactionController {
     async handle(request: Request, response: Response) {

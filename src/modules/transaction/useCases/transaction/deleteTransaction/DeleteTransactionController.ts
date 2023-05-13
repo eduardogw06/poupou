@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { DeleteTransactionUseCase } from "./DeleteTransactionUseCase";
-import { getUserIdFromAuthHeader } from "../../../../utils/getUserIdFromAuthHeader";
+import { getUserIdFromAuthHeader } from "../../../../../utils/getUserIdFromAuthHeader";
 
 class DeleteTransactionController {
     async handle(request: Request, response: Response) {

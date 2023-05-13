@@ -1,30 +1,29 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { UpdateTransactionUseCase } from "./UpdateTransactionUseCase";
-import { getUserIdFromAuthHeader } from "../../../../utils/getUserIdFromAuthHeader";
+import { CreateTransactionUseCase } from "./CreateTransactionUseCase";
+import { getUserIdFromAuthHeader } from "../../../../../utils/getUserIdFromAuthHeader";
 
-class UpdateTransactionController {
+class CreateTransactionController {
     async handle(request: Request, response: Response) {
         const {
-            transaction_id,
             target_id,
-            type_id,
+            type,
             amount,
             date
         } = request.body;
         const user_id = getUserIdFromAuthHeader(request.headers.authorization);
 
-        const updateTransactionUseCase = container.resolve(UpdateTransactionUseCase);
-        await updateTransactionUseCase.execute({
+        const createTransactionUseCase = container.resolve(CreateTransactionUseCase);
+        await createTransactionUseCase.execute({
             user_id,
-            transaction_id,
             target_id,
-            type_id,
+            type,
             amount,
             date
         });
+
         return response.status(201).send();
     }
 }
 
-export { UpdateTransactionController } 
+export { CreateTransactionController }
