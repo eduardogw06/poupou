@@ -20,7 +20,7 @@ class User {
     nullable: true
   })
   photo: string | null;
-  
+
   @Column({
     type: 'text',
     nullable: true
@@ -32,6 +32,9 @@ class User {
 
   @Column()
   dark_theme: boolean;
+
+  @Column()
+  password_changed: Date
 
   @CreateDateColumn()
   created_at: Date;

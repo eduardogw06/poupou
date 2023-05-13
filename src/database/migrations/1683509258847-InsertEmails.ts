@@ -31,6 +31,14 @@ export class InsertEmails1683509258847 implements MigrationInterface {
                         content: 'Tem dinheiro pingando no objetivo [target_name]! Você acaba de aportar [transaction_amount] e está cada vez mais perto de alcançar seu sonho.',
                         active: true
                     },
+                    {
+                        uuid: process.env.PASSWORD_RECOVERY_EMAIL,
+                        description: 'Recuperação de senha',
+                        warning: 'Este e-mail será enviado ao usuário tentar recuperar sua senha, se atente nisso ao editar o conteúdo desta mensagem.',
+                        subject: 'Solicitação de recuperação de senha',
+                        content: '<p>Olá,<strong> [name]</strong>! Recebemos sua solicitação de alteração de senha e iremos prosseguir com seu pedido. Para isso, iremos fornecer a você uma nova senha. Fique a vontade para alterá-la assim que realizar o login no sistema. A nova senha é:&nbsp;</p><h2><strong>[password_recovery]</strong></h2>',
+                        active: true
+                    },
                 ]
                 )
             )
