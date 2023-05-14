@@ -6,9 +6,11 @@ import "./database";
 import "./shared/container";
 import { AppError } from "./errors/AppError";
 import cors from 'cors';
+import * as cron from 'cron';
 
 import swaggerUi from "swagger-ui-express";
 import swaggerFile from "../src/swagger.json";
+import { crons } from "./utils/crons";
 const app = express();
 
 var corsOptions = {
@@ -16,6 +18,9 @@ var corsOptions = {
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE']
 };
+
+const scheduledTransactionJob = new cron.CronJob('0 1 1,5,10,15,20,25 * *', crons);
+scheduledTransactionJob.start();
 
 app.use(cors(corsOptions))
 

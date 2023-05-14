@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { ensureAuthenticated } from "../middleware/ensureAuthenticated";
-import { CreateTransactionController } from "../modules/transaction/useCases/createTransaction/CreateTransactionController";
-import { DeleteTransactionController } from "../modules/transaction/useCases/deleteTransaction/DeleteTransactionController";
-import { UpdateTransactionController } from "../modules/transaction/useCases/updateTransaction/UpdateTransactionController";
-import { ListTransactionController } from "../modules/transaction/useCases/listTransaction/ListTransactionController";
+import { CreateTransactionController } from "../modules/transaction/useCases/transaction/createTransaction/CreateTransactionController";
+import { UpdateTransactionController } from "../modules/transaction/useCases/transaction/updateTransaction/UpdateTransactionController";
+import { DeleteTransactionController } from "../modules/transaction/useCases/transaction/deleteTransaction/DeleteTransactionController";
+import { ListTransactionController } from "../modules/transaction/useCases/transaction/listTransaction/ListTransactionController";
 
 const transactionsRoutes = Router();
 

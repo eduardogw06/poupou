@@ -15,7 +15,7 @@ class UpdateUserPhotoController {
             const updateUsePhotoUseCase = container.resolve(UpdateUserPhotoUseCase);
             await updateUsePhotoUseCase.execute({ user_id, base64Photo });
 
-            return response.status(204).send();
+            return response.status(204).send({ photo: base64Photo });
         }
     }
 }

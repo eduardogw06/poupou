@@ -15,6 +15,7 @@ interface IResponse {
         name: string;
         email: string;
         is_admin: boolean;
+        photo: string;
     };
     token: string;
 }
@@ -48,17 +49,18 @@ class AuthenticateUserUseCase {
             expiresIn: "1d",
         });
 
-        const tokenReturn: IResponse = {
+        const userData: IResponse = {
             token,
             user: {
                 id: user.uuid,
                 name: user.name,
                 email: user.email,
-                is_admin: user.is_admin
+                is_admin: user.is_admin,
+                photo: user.photo
             }
         };
 
-        return tokenReturn;
+        return userData;
     }
 }
 

@@ -13,7 +13,7 @@ class UpdateUserPhotoUseCase {
         private usersRepository: IUsersRepository
     ) { }
 
-    async execute({ user_id, base64Photo }: IRequest) {
+    async execute({ user_id, base64Photo }: IRequest): Promise<void> {
         const user = await this.usersRepository.findById(user_id);
 
         user.photo = base64Photo;

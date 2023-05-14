@@ -98,8 +98,7 @@ class TransactionsRepository implements ITransactionsRepository {
             )
             .select(["transactions.uuid", "transactions.target_id", "target.description", "transactions.type_id", "type.description", "transactions.amount", "transactions.date"])
             .where("target.user_id::text = :user_id", { user_id })
-            .andWhere("transactions.uuid::text = :id", { id })
-            .orderBy("transactions.date");
+            .andWhere("transactions.uuid::text = :id", { id });
 
         if (onlyTransaction)
             return await query.getOne();

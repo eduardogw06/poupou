@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
-import { ICreateTransactionDTO } from "../../dtos/ICreateTransactionDTO";
-import { TransactionsRepository } from "../../repositories/implementations/TransactionsRepository";
+import { TransactionsRepository } from "../../../repositories/implementations/TransactionsRepository";
+import { ICreateTransactionDTO } from "../../../dtos/ICreateTransactionDTO";
 
 @injectable()
 class CreateTransactionUseCase {
