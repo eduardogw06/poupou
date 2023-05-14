@@ -9,7 +9,9 @@ import { ICategoriesRepository } from "../../modules/target/repositories/ICatego
 import { ITargetsRepository } from "../../modules/target/repositories/ITargetsRepository";
 import { CategoriesRepository } from "../../modules/target/repositories/implementations/CategoriesRepository";
 import { TargetsRepository } from "../../modules/target/repositories/implementations/TargetsRepository";
+import { IAutomaticInvestmentsRepository } from "../../modules/transaction/repositories/IAutomaticInvestmentsRepository";
 import { ITransactionsRepository } from "../../modules/transaction/repositories/ITransactionsRepository";
+import { AutomaticInvestmentsRepository } from "../../modules/transaction/repositories/implementations/AutomaticInvestmentsRepository";
 import { TransactionsRepository } from "../../modules/transaction/repositories/implementations/TransactionsRepository";
 
 container.registerSingleton<IUsersRepository>(
@@ -40,4 +42,9 @@ container.registerSingleton<IMenusRepository>(
 container.registerSingleton<IEmailsRepository>(
     "EmailsRepository",
     EmailsRepository
+)
+
+container.registerSingleton<IAutomaticInvestmentsRepository>(
+    "AutomaticInvestmentsRepository",
+    AutomaticInvestmentsRepository
 )
