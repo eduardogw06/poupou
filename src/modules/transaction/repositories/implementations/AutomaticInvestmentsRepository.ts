@@ -41,7 +41,7 @@ class AutomaticInvestmentsRepository implements IAutomaticInvestmentsRepository 
                 "target",
                 "target.uuid::text=automatic_investments.target_id"
             )
-            .select(["automatic_investments.uuid", "target.uuid", "target.description", "automatic_investments.amount", "automatic_investments.day", "automatic_investments.active"])
+            .select(["automatic_investments.uuid", "target.uuid", "target.description", "target.user_id", "automatic_investments.amount", "automatic_investments.day", "automatic_investments.active"])
             .where("target.user_id::text = :user_id", { user_id });
         query.orderBy("automatic_investments.created_at");
 
@@ -55,7 +55,7 @@ class AutomaticInvestmentsRepository implements IAutomaticInvestmentsRepository 
                 "target",
                 "target.uuid::text=automatic_investments.target_id"
             )
-            .select(["automatic_investments.uuid", "automatic_investments.target_id", "target.description", "automatic_investments.amount", "automatic_investments.day", "automatic_investments.active"])
+            .select(["automatic_investments.uuid", "automatic_investments.target_id", "target.description", "target.user_id", "automatic_investments.amount", "automatic_investments.day", "automatic_investments.active"])
             .where("target.user_id::text = :user_id", { user_id })
             .andWhere("automatic_investments.uuid::text = :automatic_investment_id", { automatic_investment_id });
 
@@ -65,17 +65,18 @@ class AutomaticInvestmentsRepository implements IAutomaticInvestmentsRepository 
         return await query.getRawOne();
     }
 
-    async findByDay(day: number, active: boolean): Promise<AutomaticInvestment[]> {
+    async findByDay(day: number, active: boolean): Promise<IListAutomaticInvestmentDTO[]> {
         const query = this.repository.createQueryBuilder("automatic_investments")
             .innerJoinAndSelect(
                 "targets",
                 "target",
                 "target.uuid::text=automatic_investments.target_id"
             )
-            .select(["automatic_investments.uuid", "automatic_investments.target_id", "target.description", "automatic_investments.amount", "automatic_investments.day", "automatic_investments.active"])
+            .select([
+                "automatic_investments.uuid", "automatic_investments.target_id", "target.description", "target.user_id", "automatic_investments.amount", "automatic_investments.day", "automatic_investments.active"
+            ])
             .where("automatic_investments.day = :day", { day })
             .andWhere("automatic_investments.active = :active", { active });
-
 
         return await query.getRawMany();
     }
