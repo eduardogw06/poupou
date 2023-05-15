@@ -1,5 +1,5 @@
 import { inject, injectable } from "tsyringe";
-import { TargetsRepository } from "../../../repositories/implementations/TargetsRepository";
+import { ITargetsRepository } from "../../../repositories/ITargetsRepository";
 
 interface IRequest {
     description: string;
@@ -15,7 +15,7 @@ interface IRequest {
 class CreateTargetUseCase {
     constructor(
         @inject("TargetsRepository")
-        private targetsRepository: TargetsRepository
+        private targetsRepository: ITargetsRepository,
     ) { }
     async execute({
         description,
