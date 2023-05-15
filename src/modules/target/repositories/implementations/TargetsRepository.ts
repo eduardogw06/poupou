@@ -1,16 +1,15 @@
 
 import { getRepository, Repository } from "typeorm";
+import { sendMail } from "../../../../utils/sendMail";
+import { UsersRepository } from "../../../accounts/repositories/implementations/UsersRepository";
+import { EmailsRepository } from "../../../system/repositories/implementations/EmailsRepository";
+import { Transaction } from "../../../transaction/entities/Transaction";
+import { TransactionType } from "../../../transaction/entities/TransactionType";
 import { ICreateTargetsDTO } from "../../dtos/ICreateTargetsDTO";
-import { ISelectedTarget } from "../../dtos/ITargetResponseDTO";
-import { IUpdateTargetsDTO } from "../../dtos/IUpdateTargetDTO";
+import { ISelectedTarget, ITargetProgress } from "../../dtos/ITargetResponseDTO";
 import { Category } from "../../entities/Category";
 import { Target } from "../../entities/Target";
 import { ITargetsRepository } from "../ITargetsRepository";
-import { Transaction } from "../../../transaction/entities/Transaction";
-import { TransactionType } from "../../../transaction/entities/TransactionType";
-import { EmailsRepository } from "../../../system/repositories/implementations/EmailsRepository";
-import { sendMail } from "../../../../utils/sendMail";
-import { UsersRepository } from "../../../accounts/repositories/implementations/UsersRepository";
 
 class TargetsRepository implements ITargetsRepository {
     private repository: Repository<Target>;
@@ -104,7 +103,7 @@ class TargetsRepository implements ITargetsRepository {
         return await query.getRawMany();
     }
 
-    async listTargetProgress(user_id: string) {
+    async listTargetProgress(user_id: string): Promise<ITargetProgress[]> {
         return await this.repository
             .createQueryBuilder("targets")
             .leftJoinAndSelect(

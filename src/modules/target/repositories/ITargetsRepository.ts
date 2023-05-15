@@ -1,5 +1,5 @@
 import { ICreateTargetsDTO } from "../dtos/ICreateTargetsDTO";
-import { ISelectedTarget } from "../dtos/ITargetResponseDTO";
+import { ISelectedTarget, ITargetProgress } from "../dtos/ITargetResponseDTO";
 import { Target } from "../entities/Target";
 
 interface ITargetsRepository {
@@ -9,6 +9,7 @@ interface ITargetsRepository {
     findByCategory(category_id: string): Promise<ISelectedTarget[]>;
     save(target: Target): Promise<void>;
     delete(target: Target): Promise<void>;
+    listTargetProgress(user_id: string): Promise<ITargetProgress[]>
 }
 
 export { ITargetsRepository };
