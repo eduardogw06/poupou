@@ -18,8 +18,8 @@ interface ISelectedTarget {
     category_icon: string;
     targets_user_id: string;
     targets_target_amount: number;
-    targets_date_begin: Date,
-    targets_date_end: Date,
+    targets_date_begin: Date;
+    targets_date_end: Date;
 }
 
 interface ITargetProgress {
