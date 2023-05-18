@@ -39,7 +39,7 @@ class TargetsRepository implements ITargetsRepository {
 
         if (savedTarget) {
             const emailsRepository = new EmailsRepository();
-            const newTargetEmail = await emailsRepository.findById(process.env.NEW_REGISTER_EMAIL);
+            const newTargetEmail = await emailsRepository.findById(process.env.NEW_TARGET_EMAIL);
 
             const usersRepository = new UsersRepository();
             const user = await usersRepository.findById(user_id);

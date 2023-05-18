@@ -41,7 +41,7 @@ class TransactionsRepository implements ITransactionsRepository {
 
             if (savedTransaction) {
                 const emailsRepository = new EmailsRepository();
-                const newTransactionEmail = await emailsRepository.findById(process.env.NEW_REGISTER_EMAIL);
+                const newTransactionEmail = await emailsRepository.findById(process.env.NEW_TRANSACTION_EMAIL);
 
                 const usersRepository = new UsersRepository();
                 const user = await usersRepository.findById(user_id);
