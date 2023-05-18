@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class CreateUsers1661348035683 implements MigrationInterface {
 
@@ -43,6 +43,12 @@ export class CreateUsers1661348035683 implements MigrationInterface {
                         name: "dark_theme",
                         type: "boolean",
                         default: true,
+                    },
+                    {
+                        name: "password_changed",
+                        type: "boolean",
+                        default: null,
+                        isNullable: true
                     },
                     {
                         name: "created_at",

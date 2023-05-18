@@ -33,7 +33,9 @@ class User {
   @Column()
   dark_theme: boolean;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   password_changed: Date
 
   @CreateDateColumn()
