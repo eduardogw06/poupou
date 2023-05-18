@@ -1,12 +1,12 @@
+import { ITargetsRepository } from "../../../repositories/ITargetsRepository";
 import { inject, injectable } from "tsyringe";
-import { TargetsRepository } from "../../../repositories/implementations/TargetsRepository";
 import { Target } from "../../../entities/Target";
 
 @injectable()
 class DeleteTargetUseCase {
     constructor(
         @inject("TargetsRepository")
-        private targetsRepository: TargetsRepository
+        private targetsRepository: ITargetsRepository
     ) { }
 
     async execute(user_id: string, target_id: string): Promise<void> {
@@ -16,4 +16,4 @@ class DeleteTargetUseCase {
     }
 }
 
-export { DeleteTargetUseCase }
+export { DeleteTargetUseCase };

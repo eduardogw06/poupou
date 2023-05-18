@@ -1,16 +1,14 @@
+import { ITargetsRepository } from "@modules/target/repositories/ITargetsRepository";
 import { inject, injectable } from "tsyringe";
 import { IUpdateTargetsDTO } from "../../../dtos/IUpdateTargetDTO";
-import { TargetsRepository } from "../../../repositories/implementations/TargetsRepository";
 import { Target } from "../../../entities/Target";
 
 @injectable()
 class UpdateTargetUseCase {
     constructor(
         @inject("TargetsRepository")
-        private targetsRepository: TargetsRepository
+        private targetsRepository: ITargetsRepository
     ) { }
-
-
     async execute({
         target_id,
         description,
@@ -33,4 +31,4 @@ class UpdateTargetUseCase {
     }
 }
 
-export { UpdateTargetUseCase }
+export { UpdateTargetUseCase };
