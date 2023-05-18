@@ -13,7 +13,7 @@ class DeleteCategoryUseCase {
         const targetsRepository = new TargetsRepository();
         const targetsByCategory = await targetsRepository.findByCategory(category_id);
 
-        if (targetsByCategory) throw new AppError("Não é possível excluir uma categoria já vinculada a um ou mais objetivo(s).");
+        if (targetsByCategory.length > 0) throw new AppError("Não é possível excluir uma categoria já vinculada a um ou mais objetivo(s).");
 
         const category = await this.categoriesRepository.findById(category_id);
         await this.categoriesRepository.delete(category);
