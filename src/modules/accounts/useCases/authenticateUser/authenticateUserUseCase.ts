@@ -32,11 +32,9 @@ class AuthenticateUserUseCase {
 
         const user = await this.usersRepository.findByEmail(email);
 
-        if (user.google_id) throw new AppError("Para acessar sua conta, faça seu login com o Google.");
+        if (!user) throw new AppError("E-mail ou senha incorretos!");
 
-        if (!user) {
-            throw new AppError("E-mail ou senha incorretos!");
-        }
+        if (user.google_id) throw new AppError("Para acessar sua conta, faça seu login com o Google.");
 
         const passwordMatch = await compare(password, user.password);
 

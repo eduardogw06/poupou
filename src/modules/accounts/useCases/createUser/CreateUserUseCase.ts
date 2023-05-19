@@ -40,7 +40,7 @@ class CreateUserUseCase {
       dark_theme
     });
 
-    return UserMap.toDTO(createdUser);
+    return UserMap.toDTO(createdUser, {});
   }
 }
 
