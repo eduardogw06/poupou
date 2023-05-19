@@ -1,5 +1,7 @@
 import { inject, injectable } from "tsyringe";
 import { AutomaticInvestmentsRepository } from "../../../repositories/implementations/AutomaticInvestmentsRepository";
+import { AppError } from "@errors/AppError";
+import { TargetsRepository } from "@modules/target/repositories/implementations/TargetsRepository";
 
 interface IRequest {
     user_id: string;
@@ -27,6 +29,13 @@ class UpdateAutomaticInvestmentUseCase {
         active
     }: IRequest): Promise<void> {
         const automatic_investment = await this.automaticInvestmentsRepository.findById(user_id, automatic_investment_id, true);
+        if (!automatic_investment) throw new AppError("Usuário não encontrado ou aporte automático não pertence ao usuário informado.");
+
+        const targetsRepository = new TargetsRepository();
+        const target = await targetsRepository.findById(user_id, target_id);
+        if (!target) throw new AppError("Selecione o objetivo a ser investido.");
+
+        if (Number(amount) < 10) throw new AppError("O valor mínimo para um aporte é de R$ 10,00.");
 
         if (automatic_investment) {
             automatic_investment.target_id = target_id ?? automatic_investment.target_id;
