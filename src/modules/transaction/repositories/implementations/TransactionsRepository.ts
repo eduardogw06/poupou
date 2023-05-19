@@ -10,6 +10,7 @@ import { sendMail } from "../../../../utils/sendMail";
 import { TargetsRepository } from "../../../target/repositories/implementations/TargetsRepository";
 import { Target } from "../../../target/entities/Target";
 import { numberToReal } from "../../../../utils/numberToReal";
+import { IListTransactionsDTO } from "@modules/transaction/dtos/IListTransactionsDTO";
 
 
 class TransactionsRepository implements ITransactionsRepository {
@@ -64,7 +65,7 @@ class TransactionsRepository implements ITransactionsRepository {
         }
     }
 
-    async list(user_id: string, target_id?: string): Promise<Transaction[]> {
+    async list(user_id: string, target_id?: string): Promise<IListTransactionsDTO[]> {
         const query = this.repository.createQueryBuilder("transactions")
             .innerJoinAndSelect(
                 "targets",
@@ -120,7 +121,7 @@ class TransactionsRepository implements ITransactionsRepository {
         return Number(queryResult.sum) || 0;
     };
 
-    async save(transaction: IUpdateTransactionsDTO): Promise<void> {
+    async save(transaction: Transaction): Promise<void> {
         await this.repository.save(transaction);
     }
 
