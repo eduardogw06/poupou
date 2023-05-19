@@ -7,10 +7,13 @@ import "./shared/container";
 import { AppError } from "./errors/AppError";
 import cors from 'cors';
 import * as cron from 'cron';
+import createConnection from 'database/index';
 
 import swaggerUi from "swagger-ui-express";
 import swaggerFile from "../src/swagger.json";
 import { crons } from "./utils/crons";
+
+createConnection();
 const app = express();
 
 var corsOptions = {

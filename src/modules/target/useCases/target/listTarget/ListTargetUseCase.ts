@@ -1,7 +1,7 @@
+import { ITargetsRepository } from "../../../repositories/ITargetsRepository";
 import { inject, injectable } from "tsyringe";
 import { ISelectedTarget, ITargetProgress, ITargetResponseDTO } from "../../../dtos/ITargetResponseDTO";
 import { TargetMap } from "../../../mapper/TargetMap";
-import { TargetsRepository } from "../../../repositories/implementations/TargetsRepository";
 
 interface IRequest {
     user_id: string;
@@ -12,7 +12,7 @@ interface IRequest {
 class ListTargetUseCase {
     constructor(
         @inject("TargetsRepository")
-        private targetsRepository: TargetsRepository
+        private targetsRepository: ITargetsRepository
     ) { }
 
     async execute({ user_id, target_id }: IRequest): Promise<ITargetResponseDTO[]> {

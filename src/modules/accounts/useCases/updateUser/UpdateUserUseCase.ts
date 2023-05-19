@@ -12,7 +12,7 @@ class UpdateUserUseCase {
     async execute({ user_id, name, email, dark_theme }: IUpdateUserDTO): Promise<void> {
         const user = await this.usersRepository.findById(user_id);
 
-        if (!user) throw new AppError("Apenas usuários autenticados estão autorizados a realizar alterações em seu perfil.");
+        if (!user) throw new AppError("Sessão expirada. Realize seu login novamente.");
 
         const userByEmail = await this.usersRepository.findByEmail(email);
         if (userByEmail && email === userByEmail.email && userByEmail.uuid !== user_id)

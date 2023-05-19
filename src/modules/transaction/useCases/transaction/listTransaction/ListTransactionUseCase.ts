@@ -1,5 +1,5 @@
+import { ITransactionsRepository } from "@modules/transaction/repositories/ITransactionsRepository";
 import { inject, injectable } from "tsyringe";
-import { TransactionsRepository } from "../../../repositories/implementations/TransactionsRepository";
 import { IListTransactionsDTO } from "../../../dtos/IListTransactionsDTO";
 import { ITransactionResponseDTO } from "../../../dtos/ITransactionResponseDTO";
 import { TransactionMap } from "../../../mapper/TransactionMap";
@@ -14,7 +14,7 @@ interface IRequest {
 class ListTransactionUseCase {
     constructor(
         @inject("TransactionsRepository")
-        private transactionsRepository: TransactionsRepository
+        private transactionsRepository: ITransactionsRepository
     ) { }
 
     async execute({ user_id, target_id, transaction_id }: IRequest) {
@@ -33,4 +33,4 @@ class ListTransactionUseCase {
     }
 }
 
-export { ListTransactionUseCase }
+export { ListTransactionUseCase };

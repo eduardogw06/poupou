@@ -17,7 +17,8 @@ export class InsertUserAdmin1661362262942 implements MigrationInterface {
                     photo: null,
                     google_id: null,
                     is_admin: true,
-                    dark_theme: true
+                    dark_theme: true,
+                    password_changed: null
                 })
             )
     }
