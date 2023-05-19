@@ -98,7 +98,7 @@ describe('UpdateTransactionUseCase', (): void => {
             .rejects.toEqual(new AppError("Usuário não encontrado ou aporte não pertence ao usuário informado."));
     });
 
-    it("should not update transaction with invalid target_id", async (): Promise<void> => {
+    it("should not update a transaction with invalid target_id", async (): Promise<void> => {
         const user = await usersRepository.findByEmail(process.env.ADMIN_EMAIL);
         const transactions = await transactionsRepository.list(user.uuid);
         const transaction_id = transactions[0].transactions_uuid;
