@@ -80,7 +80,7 @@ class TargetsRepository implements ITargetsRepository {
                 "category",
                 "targets.category_id = category.uuid::text"
             )
-            .select(["targets.uuid", "targets.description", "targets.category_id", "category.icon as category_icon", "targets.user_id", "targets.target_amount", "targets.date_begin", "targets.date_end"])
+            .select(["targets.uuid", "targets.description", "targets.category_id", "category.description as category", "category.icon as category_icon", "targets.user_id", "targets.target_amount", "targets.date_begin", "targets.date_end"])
             .where('targets.user_id = :user_id', { user_id: user_id })
             .andWhere('targets.uuid = :uuid', { uuid: id })
 
