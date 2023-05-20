@@ -15,6 +15,7 @@ interface ISelectedTarget {
     targets_uuid: string;
     targets_description: string;
     targets_category_id: string;
+    category: string;
     category_icon: string;
     targets_user_id: string;
     targets_target_amount: number;
